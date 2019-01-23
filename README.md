@@ -1,6 +1,6 @@
 # chemLab :ok_hand: :bar_chart:
 
-##### *Growing plants over a period of time, analysing the results and drawing conclusions* 
+##### *Growing plants over a period of time, analysing the results and writing down differences* 
 
 ### 1. Introduction
 Plants are exposed to different conditions during their period of growth, which affect them in different ways. The goal of this lab is to out if there are any observable differences between these two samples of plants : 
@@ -20,4 +20,6 @@ For measuring the temperatures around the plants:
 - Wire
 
 ### 4. Procedure
+The f
+
 
