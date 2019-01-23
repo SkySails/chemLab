@@ -7,10 +7,17 @@ Plants are exposed to different conditions during their period of growth, which 
  - Sample with a stable temperature and normal indoor conditions
  - Sample with a changing temperature but otherwise normal conditions.
 
-
 ### 2. Hyptothesis
 The sample subject to changing temperatures is going to show signs of slower and more uneven development compared to the sample with "regular" indoor conditions. This will be reflected in either growth, size, amount of nutrition or any combination of these.
+
 ### 3. Materials
+- plants (insert species)
+- growbed with soil and water
+
+For measuring the temperatures around the plants:
+- Raspberry Pi
+- Temperature sensor (model: DS18B20)
+- Wire
 
 ### 4. Procedure
 
