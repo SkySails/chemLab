@@ -1,4 +1,4 @@
-# chemLab :ok_hand: :bar_chart:
+# chemLab :bar_chart:
 
 ##### *Growing plants over a period of time, analysing the results and writing down differences* 
 
