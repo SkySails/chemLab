@@ -11,7 +11,7 @@ Plants are exposed to different conditions during their period of growth, which 
 The sample subject to changing temperatures is going to show signs of slower and more uneven development compared to the sample with "regular" indoor conditions. This will be reflected in either growth, size, amount of nutrition, amount of chlorophyll or any combination of these.
 
 ### 3. Materials
-- plants (insert species)
+- plants (Lepidium genus)
 - growbed with soil and water (8 pcs, 4 for each sample)
 
 For measuring the temperatures around the plants:
@@ -22,3 +22,5 @@ For measuring the temperatures around the plants:
 ### 4. Procedure
 This lab is to be carried out over a 4 week period, starting Thursday 2019-01-31.
 The first week the growbeds with plants are going to be set up, as well as the measuring equipment. After that, the plants will be looked at once a week. After the lab is finished, the temperature measurements will be analyzed as well as the size, weight and amount of chlorophyll of the plants. If any differences are found between both samples, it's to be written down.  
+#### 4.1 Timeline
+![Timeline](https://github.com/SkySails/chemLab/blob/master/images/project/timeline.jpg?raw=true)
