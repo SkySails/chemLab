@@ -11,7 +11,7 @@ Plants are exposed to different conditions during their period of growth, which 
 The sample subject to changing temperatures is going to show signs of slower and more uneven development compared to the sample with "regular" indoor conditions. This will be reflected in either growth, size, amount of nutrition, amount of chlorophyll or any combination of these.
 
 ### 3. Materials
-- plants (Lepidium genus)
+- Garden cress (Lepidium genus)
 - growbed with soil and water (8 pcs, 4 for each sample)
 
 For measuring the temperatures around the plants:
