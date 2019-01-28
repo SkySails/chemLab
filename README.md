@@ -5,7 +5,8 @@
 ### 1. Introduction
 Plants are exposed to different conditions during their period of growth, which affect them in different ways. The goal of this lab is to find out if there are any observable differences in the matured plants between these two samples of plants : 
  - Sample grown with a stable temperature and normal indoor conditions
- - Sample growm with a changing temperature but otherwise normal conditions.
+ - Sample grown with a changing temperature but otherwise normal conditions.
+ - _Optionally:_ Sample grown in close proximity to active wireless router.
 
 ### 2. Hypothesis
 The sample subject to changing temperatures is going to show signs of slower and more uneven development compared to the sample with "regular" indoor conditions. This will be reflected in either growth, size, amount of nutrition, amount of chlorophyll or any combination of these.
