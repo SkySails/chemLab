@@ -1,6 +1,6 @@
 # chemLab :bar_chart:
 
-##### *Growing plants over a period of time, analysing the results and writing down differences* 
+##### *Growing plants subject to varied conditions over a period of time, analysing the results and writing down differences* 
 
 ### 1. Introduction
 Plants are exposed to different conditions during their period of growth, which affect them in different ways. The goal of this lab is to find out if there are any observable differences in the matured plants between these two samples of plants : 
