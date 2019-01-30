@@ -17,8 +17,8 @@ The sample subject to changing temperatures is going to show signs of slower and
 
 For measuring the temperatures around the plants:
 - Raspberry Pi
-- Temperature sensor (model: DS18B20)
-- Wire
+- Temperature sensor and humitidy sensor (model: DHT11)
+- Wires
 
 ### 4. Procedure
 This lab is to be carried out over a 4 week period, starting Thursday 2019-01-31.
