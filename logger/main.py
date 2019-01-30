@@ -11,7 +11,7 @@ sheets.auth('credentials.json', 'data')
 ''' Measures temperature and humidity, then passes the values to 
 sheets.write(), which writes them to the sheet <data> along with 
 the current time. This happens every 5 minutes, as you can see 
-in the time.sleep() call. '''
+in the time.sleep() call.'''
 while True:
     humidity, temperature = sensor.measure()
     sheets.write([stringtime.time(), temperature, humidity])
