@@ -27,25 +27,15 @@ def dist_2_pts(x1, y1, x2, y2):
     return np.sqrt((x2 - x1)**2 + (y2 - y1)**2)
 
 def calibrate_gauge(gauge_number, file_type):
-    '''
-        This function should be run using a test image in order to calibrate the range available to the dial as well as the
-        units.  It works by first finding the center point and radius of the gauge.  Then it draws lines at hard coded intervals
-        (separation) in degrees.  It then prompts the user to enter position in degrees of the lowest possible value of the gauge,
-        as well as the starting value (which is probably zero in most cases but it won't assume that).  It will then ask for the
-        position in degrees of the largest possible value of the gauge. Finally, it will ask for the units.  This assumes that
-        the gauge is linear (as most probably are).
-        It will return the min value with angle in degrees (as a tuple), the max value with angle in degrees (as a tuple),
-        and the units (as a string).
-    '''
 
-    img = cv2.imread('gauge-%s.%s' %(gauge_number, file_type))
+    img = cv2.imread('C:\\Users\\Malte\\Desktop\\CodeStuff\\chemLab\\analog-gauge-reader\\gauge-2.jpg')
     height, width = img.shape[:2]
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  #convert to gray
     #gray = cv2.GaussianBlur(gray, (5, 5), 0)
     # gray = cv2.medianBlur(gray, 5)
 
     #for testing, output gray image
-    #cv2.imwrite('gauge-%s-bw.%s' %(gauge_number, file_type),gray)
+    cv2.imwrite('gauge-%s-bw.%s' %(gauge_number, file_type),gray)
 
     #detect circles
     #restricting the search from 35-48% of the possible radii gives fairly good results across different samples.  Remember that
@@ -54,13 +44,14 @@ def calibrate_gauge(gauge_number, file_type):
     # average found circles, found it to be more accurate than trying to tune HoughCircles parameters to get just the right one
     a, b, c = circles.shape
     x,y,r = avg_circles(circles, b)
+    c_center = y+45
 
     #draw center and circle
     cv2.circle(img, (x, y), r, (0, 0, 255), 3, cv2.LINE_AA)  # draw circle
-    cv2.circle(img, (x, y), 2, (0, 255, 0), 3, cv2.LINE_AA)  # draw center of circle
+    cv2.circle(img, (x, c_center), 2, (0, 255, 0), 3, cv2.LINE_AA)  # draw center of circle
 
     #for testing, output circles on image
-    #cv2.imwrite('gauge-%s-circles.%s' % (gauge_number, file_type), img)
+    cv2.imwrite('gauge-%s-circles.%s' % (gauge_number, file_type), img)
 
 
     #for calibration, plot lines from center going out at every 10 degrees and add marker
@@ -103,26 +94,26 @@ def calibrate_gauge(gauge_number, file_type):
     cv2.imwrite('gauge-%s-calibration.%s' % (gauge_number, file_type), img)
 
     #get user input on min, max, values, and units
-    print 'gauge number: %s' %gauge_number
-    min_angle = raw_input('Min angle (lowest possible angle of dial) - in degrees: ') #the lowest possible angle
-    max_angle = raw_input('Max angle (highest possible angle) - in degrees: ') #highest possible angle
-    min_value = raw_input('Min value: ') #usually zero
-    max_value = raw_input('Max value: ') #maximum reading of the gauge
-    units = raw_input('Enter units: ')
+    # print('gauge number: %s' %gauge_number)
+    # min_angle = 50 #input('Min angle (lowest possible angle of dial) - in degrees: ') #the lowest possible angle
+    # max_angle = 320 #input('Max angle (highest possible angle) - in degrees: ') #highest possible angle
+    # min_value = 0 #input('Min value: ') #usually zero
+    # max_value = 14 #input('Max value: ') #maximum reading of the gauge
+    # units = "PSI" #input('Enter units: ')
 
     #for testing purposes: hardcode and comment out raw_inputs above
-    # min_angle = 45
-    # max_angle = 320
-    # min_value = 0
-    # max_value = 200
-    # units = "PSI"
+    min_angle = 120
+    max_angle = 230
+    min_value = 3
+    max_value = 8
+    units = "PH"
 
     return min_angle, max_angle, min_value, max_value, units, x, y, r
 
 def get_current_value(img, min_angle, max_angle, min_value, max_value, x, y, r, gauge_number, file_type):
-
+    c_center = y+45
     #for testing purposes
-    #img = cv2.imread('gauge-%s.%s' % (gauge_number, file_type))
+    img = cv2.imread('C:\\Users\\Malte\\Desktop\\CodeStuff\\chemLab\\analog-gauge-reader\\gauge-2.jpg')
 
     gray2 = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
@@ -152,17 +143,15 @@ def get_current_value(img, min_angle, max_angle, min_value, max_value, x, y, r, 
 
     # for testing, show image after thresholding
     cv2.imwrite('gauge-%s-tempdst2.%s' % (gauge_number, file_type), dst2)
-
     # find lines
     minLineLength = 10
     maxLineGap = 0
     lines = cv2.HoughLinesP(image=dst2, rho=3, theta=np.pi / 180, threshold=100,minLineLength=minLineLength, maxLineGap=0)  # rho is set to 3 to detect more lines, easier to get more then filter them out later
-
-    #for testing purposes, show all found lines
-    for i in range(0, len(lines)):
-      for x1, y1, x2, y2 in lines[i]:
-         cv2.line(img, (x1, y1), (x2, y2), (0, 255, 0), 2)
-         cv2.imwrite('gauge-%s-lines-test.%s' %(gauge_number, file_type), img)
+    # for testing purposes, show all found lines
+    # for i in range(0, len(lines)):
+    #   for x1, y1, x2, y2 in lines[i]:
+    #      cv2.line(img, (x1, y1), (x2, y2), (0, 255, 0), 2)
+    #      cv2.imwrite('gauge-%s-lines-ALL.%s' %(gauge_number, file_type), img)
 
     # remove all lines outside a given radius
     final_line_list = []
@@ -186,6 +175,7 @@ def get_current_value(img, min_angle, max_angle, min_value, max_value, x, y, r, 
                 line_length = dist_2_pts(x1, y1, x2, y2)
                 # add to final list
                 final_line_list.append([x1, y1, x2, y2])
+    print("The following lines were cropped and are final: " + str(final_line_list))
 
     #testing only, show all lines after filtering
     for i in range(0,len(final_line_list)):
@@ -207,22 +197,22 @@ def get_current_value(img, min_angle, max_angle, min_value, max_value, x, y, r, 
     cv2.imwrite('gauge-%s-lines-2.%s' % (gauge_number, file_type), img)
 
     #find the farthest point from the center to be what is used to determine the angle
-    dist_pt_0 = dist_2_pts(x, y, x1, y1)
-    dist_pt_1 = dist_2_pts(x, y, x2, y2)
+    dist_pt_0 = dist_2_pts(x, c_center, x1, y1)
+    dist_pt_1 = dist_2_pts(x, c_center, x2, y2)
     if (dist_pt_0 > dist_pt_1):
         x_angle = x1 - x
-        y_angle = y - y1
+        y_angle = c_center - y1
     else:
         x_angle = x2 - x
-        y_angle = y - y2
+        y_angle = c_center - y2
     # take the arc tan of y/x to find the angle
     res = np.arctan(np.divide(float(y_angle), float(x_angle)))
     #np.rad2deg(res) #coverts to degrees
 
-    # print x_angle
-    # print y_angle
-    # print res
-    # print np.rad2deg(res)
+    # print (x_angle)
+    # print (y_angle)
+    # print (res)
+    # print (np.rad2deg(res))
 
     #these were determined by trial and error
     res = np.rad2deg(res)
@@ -252,15 +242,15 @@ def get_current_value(img, min_angle, max_angle, min_value, max_value, x, y, r, 
     return new_value
 
 def main():
-    gauge_number = 1
+    gauge_number = 2
     file_type='jpg'
     # name the calibration image of your gauge 'gauge-#.jpg', for example 'gauge-5.jpg'.  It's written this way so you can easily try multiple images
     min_angle, max_angle, min_value, max_value, units, x, y, r = calibrate_gauge(gauge_number, file_type)
 
     #feed an image (or frame) to get the current value, based on the calibration, by default uses same image as calibration
-    img = cv2.imread('gauge-%s.%s' % (gauge_number, file_type))
-    val = get_current_value(img, min_angle, max_angle, min_value, max_value, x, y, r, gauge_number, file_type)
-    print "Current reading: %s %s" %(val, units)
+    img = cv2.imread('C:\\Users\\Malte\\Desktop\\CodeStuff\\chemLab\\analog-gauge-reader\\gauge-2.jpg')
+    val = get_current_value(img, min_angle, max_angle, min_value, max_value, x, y, r, 2, file_type)
+    print("Current reading: %s %s" %(val, units))
 
 if __name__=='__main__':
     main()
