@@ -6,7 +6,7 @@ import analog_gauge.aGauge as aGauge
 ''' Authorizes with the google drive api using downloaded credentials from
 https://console.cloud.google.com/apis/dashboard and opens the sheet <data>.
 The sheet specified needs to be shared with the email address in credentials.json.'''
-sheets.auth('credentials.json', 'data')
+sheets.auth('logger/credentials.json', 'data')
 
 ''' Measures temperature and humidity, then passes the values to 
 sheets.write(), which writes them to the sheet <data> along with 

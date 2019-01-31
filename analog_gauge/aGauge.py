@@ -28,7 +28,7 @@ def dist_2_pts(x1, y1, x2, y2):
 
 def calibrate_gauge(gauge_number, file_type):
 
-    img = cv2.imread('C:\\Users\\Malte\\Desktop\\CodeStuff\\chemLab\\analog-gauge-reader\\gauge-2.jpg')
+    img = cv2.imread('analog_gauge/gauge-2.jpg')
     height, width = img.shape[:2]
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  #convert to gray
     #gray = cv2.GaussianBlur(gray, (5, 5), 0)
@@ -113,7 +113,7 @@ def calibrate_gauge(gauge_number, file_type):
 def get_current_value(img, min_angle, max_angle, min_value, max_value, x, y, r, gauge_number, file_type):
     c_center = y+45
     #for testing purposes
-    img = cv2.imread('C:\\Users\\Malte\\Desktop\\CodeStuff\\chemLab\\analog-gauge-reader\\gauge-2.jpg')
+    img = cv2.imread('analog_gauge/gauge-2.jpg')
 
     gray2 = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
@@ -175,7 +175,7 @@ def get_current_value(img, min_angle, max_angle, min_value, max_value, x, y, r, 
                 line_length = dist_2_pts(x1, y1, x2, y2)
                 # add to final list
                 final_line_list.append([x1, y1, x2, y2])
-    print("The following lines were cropped and are final: " + str(final_line_list))
+    #print("The following lines were cropped and are final: " + str(final_line_list))
 
     #testing only, show all lines after filtering
     for i in range(0,len(final_line_list)):
@@ -248,9 +248,9 @@ def main():
     min_angle, max_angle, min_value, max_value, units, x, y, r = calibrate_gauge(gauge_number, file_type)
 
     #feed an image (or frame) to get the current value, based on the calibration, by default uses same image as calibration
-    img = cv2.imread('C:\\Users\\Malte\\Desktop\\CodeStuff\\chemLab\\analog-gauge-reader\\gauge-2.jpg')
+    img = cv2.imread('analog_gauge/gauge-2.jpg')
     val = get_current_value(img, min_angle, max_angle, min_value, max_value, x, y, r, 2, file_type)
-    print("Current reading: %s %s" %(val, units))
+    return '%s' %(round(val, 1))
 
 if __name__=='__main__':
     main()

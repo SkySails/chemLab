@@ -23,7 +23,7 @@ def auth(credpath, sheetname):
     credentials = ServiceAccountCredentials.from_json_keyfile_name(credpath, scope)
     client = gspread.authorize(credentials)
     global sheet
-    sheet = client.open('data').sheet1
+    sheet = client.open('data').worksheet("Maltes Paj")
 
 
 def write(data):
