@@ -1,4 +1,0 @@
-vscode/
-logger/credentials.json
-.*
-!/.gitignore
