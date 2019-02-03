@@ -21,6 +21,7 @@ def auth(credpath, sheetname):
              'https://www.googleapis.com/auth/drive']
     credpath = os.path.abspath(credpath)
     credentials = ServiceAccountCredentials.from_json_keyfile_name(credpath, scope)
+    global client
     client = gspread.authorize(credentials)
     global sheet
     sheet = client.open('data').sheet1
@@ -34,4 +35,10 @@ def write(data):
     cells on a new row to the sheet 
     previously opened using auth().
     This sheet is the Worksheet object stored in the global variable <sheet>'''
-    sheet.append_row(data)
+    try:
+        sheet.append_row(data)
+    except gspread.exceptions.APIError:
+        print('api key timed out, authorizing again.')
+        client.login()
+        sheet.append_row(data)
+
