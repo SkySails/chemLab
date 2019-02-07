@@ -23,5 +23,6 @@ For measuring the temperatures around the plants:
 ### 4. Procedure
 This lab is to be carried out over a 4 week period, starting Thursday 2019-01-31.
 The first week the growbeds with plants are going to be set up, as well as the measuring equipment. After that, the plants will be looked at once a week. After the lab is finished, the temperature measurements will be analyzed as well as the size, weight and amount of chlorophyll of the plants. If any differences are found between both samples, it's to be written down.  
+
 #### 4.1 Timeline
 ![Timeline](https://github.com/SkySails/chemLab/blob/master/images/timeline.jpg?raw=true)

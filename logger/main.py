@@ -14,7 +14,7 @@ the current time. This happens every 5 minutes, as you can see
 in the time.sleep() call.'''
 while True:
     humidity, temperature = sensor.measure()
-    if len(humidity) > 2:
+    if len(str(int(humidity))) > 2:
         humidity = int(str(humidity)[-2:])
     sheets.write([stringtime.time(), temperature, humidity])
-    time.sleep(5*60)
+    time.sleep(15*60)
